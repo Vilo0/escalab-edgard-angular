@@ -1,0 +1,76 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ accion }} Usuario</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cerrar Modal')">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+
+    <form *ngIf="accion == 'Agregar'" autocomplete="off" [formGroup]="usuarioForm" (ngSubmit)="agregar()" novalidate>
+
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" class="form-control" name="nombre" autocomplete="off" formControlName="nombre">
+        </div>
+
+        <div class="form-group">
+            <label for="">Apellido</label>
+            <input type="text" class="form-control" autocomplete="off" formControlName="apellido">
+        </div>
+
+        <div class="form-group">
+            <label for="">Email</label>
+            <input type="email" class="form-control" autocomplete="off" formControlName="email">
+        </div>
+
+        <div class="form-group">
+            <label for="">Teléfono</label>
+            <input type="email" class="form-control" autocomplete="off" formControlName="telefono">
+        </div>
+
+        <div class="form-group">
+            <label for="">Password</label>
+            <input type="password" class="form-control" autocomplete="off" formControlName="password">
+        </div>
+
+        <button type="submit" class="btn btn-large btn-success" [disabled]="!usuarioForm.valid">Agregar</button>
+    </form>
+
+    <form *ngIf="accion == 'Editar'" autocomplete="off" [formGroup]="usuarioForm" (ngSubmit)="editar()" novalidate>
+
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" class="form-control" name="nombre" autocomplete="off" formControlName="nombre">
+        </div>
+
+        <div class="form-group">
+            <label for="">Apellido</label>
+            <input type="text" class="form-control" autocomplete="off" formControlName="apellido">
+        </div>
+
+        <div class="form-group">
+            <label for="">Email</label>
+            <input type="email" class="form-control" autocomplete="off" formControlName="email">
+        </div>
+
+        <div class="form-group">
+            <label for="">Teléfono</label>
+            <input type="email" class="form-control" autocomplete="off" formControlName="telefono">
+        </div>
+
+        <div class="form-group">
+            <label for="">Password</label>
+            <input type="password" class="form-control" autocomplete="off" formControlName="password">
+        </div>
+
+        <button type="submit" class="btn btn-large btn-warning" [disabled]="!usuarioForm.valid">Editar</button>
+    </form>
+
+    <div *ngIf="accion == 'Eliminar'">
+        <button type="submit" class="btn btn-large btn-danger" (click)="eliminar()">Eliminar</button>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <!--<button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>-->
+</div>

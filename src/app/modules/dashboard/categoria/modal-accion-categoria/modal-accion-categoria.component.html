@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ accion }} Categoría</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+
+    <form *ngIf="accion == 'Agregar'" autocomplete="off" [formGroup]="categoriaForm" (ngSubmit)="agregar()" novalidate>
+        <div class="form-group">
+            <label for="nombreAgregar">Nombre</label>
+            <input id="nombreAgregar" type="text" class="form-control" autocomplete="off" formControlName="nombre">
+        </div>
+        <button type="submit" class="btn btn-large btn-success" [disabled]="!categoriaForm.valid">Agregar</button>
+    </form>
+
+    <form *ngIf="accion == 'Editar'" autocomplete="off" [formGroup]="categoriaForm" (ngSubmit)="editar()" novalidate>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Nombre</label>
+            <input type="text" class="form-control" autocomplete="off" formControlName="nombre">
+        </div>
+        <button type="submit" class="btn btn-large btn-warning" [disabled]="!categoriaForm.valid">Editar</button>
+    </form>
+
+    <div *ngIf="accion == 'Eliminar'">
+        <button type="submit" class="btn btn-large btn-danger" (click)="eliminar()">Eliminar</button>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <!--<button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>-->
+</div>

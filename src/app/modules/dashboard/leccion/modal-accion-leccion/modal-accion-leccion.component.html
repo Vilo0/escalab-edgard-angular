@@ -1,0 +1,72 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ accion }} Leccion</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cerrar Modal')">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+
+    <form *ngIf="accion == 'Agregar'" autocomplete="off" [formGroup]="leccionForm" (ngSubmit)="agregar()" novalidate>
+
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" class="form-control" name="nombre" autocomplete="off" formControlName="nombre">
+
+
+        </div>
+
+        <div class="form-group">
+            <label for="">Descripción</label>
+            <textarea class="form-control" rows="4" autocomplete="off" formControlName="descripcion"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="imagen">Imagen</label>
+            <input id="imagen" type="file" class="form-control" autocomplete="off" formControlName="documento" (change)="onFileChanged($event)">
+        </div>
+
+        <div class="form-group">
+            <label for="lista-curso">Curso</label>
+            <select class="form-control" id="lista-curso" formControlName="cursoId">
+            <option *ngFor="let curso of listaCursos" [ngValue]="curso._id">{{curso.nombre}}</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-large btn-success" [disabled]="!leccionForm.valid">Agregar</button>
+    </form>
+
+    <form *ngIf="accion == 'Editar'" autocomplete="off" [formGroup]="leccionForm" (ngSubmit)="editar()" novalidate>
+
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" class="form-control" autocomplete="off" formControlName="nombre">
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripcion</label>
+            <textarea id="descripcion" class="form-control" rows="4" autocomplete="off" formControlName="descripcion"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="imagen">Imagen</label>
+            <input id="imagen" type="file" class="form-control" autocomplete="off" formControlName="documento">
+        </div>
+
+        <div class="form-group">
+            <label for="lista-curso">Curso</label>
+            <select class="form-control" id="lista-curso" formControlName="cursoId">
+            <option *ngFor="let curso of listaCursos" [ngValue]="curso._id">{{curso.nombre}}</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-large btn-warning" [disabled]="!leccionForm.valid">Editar</button>
+    </form>
+
+    <div *ngIf="accion == 'Eliminar'">
+        <button type="submit" class="btn btn-large btn-danger" (click)="eliminar()">Eliminar</button>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <!--<button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>-->
+</div>
