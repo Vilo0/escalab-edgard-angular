@@ -41,6 +41,18 @@ export class LeccionService {
   }
 
 
+  public getLeccionesCurso(idCurso): Observable<any> {
+
+    let header= new HttpHeaders({
+      'Authorization': this.token,
+    });
+
+    return this.http
+      .get<any>(this.url +"/leccion/curso/" + idCurso, { headers: header, withCredentials: true });
+
+  }
+
+
   public postLeccion(leccion): Observable<any> {
 
     const formData: FormData = new FormData();

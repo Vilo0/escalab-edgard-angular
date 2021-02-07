@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'usuario', component: UsuarioComponent },
   { path: 'mi-perfil', component: MiPerfilComponent },
   { path: 'mis-cursos', component: MisCursosComponent },
-  { path: 'mis-lecciones', component: MisLeccionesComponent },
+  { path: 'mis-lecciones/:cursoId', component: MisLeccionesComponent },
 ];
 
 @NgModule({

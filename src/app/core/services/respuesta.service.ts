@@ -31,8 +31,12 @@ export class RespuestaService {
 
   public getRespuestas(): Observable<any> {
 
+    let header= new HttpHeaders({
+      'Authorization': this.token,
+    });
+
     return this.http
-      .get<any>(this.url +"/respuesta/");
+      .get<any>(this.url +"/respuesta/", { headers: header, withCredentials: true });
 
   }
 
@@ -90,6 +94,17 @@ export class RespuestaService {
     });
 
     return this.http.delete(this.url + "/respuesta/" + id, { headers: header, withCredentials: true });
+
+  }
+
+  public getRespuestasPregunta(idPregunta): Observable<any> {
+
+    let header= new HttpHeaders({
+      'Authorization': this.token,
+    });
+
+    return this.http
+      .get<any>(this.url +"/respuesta/pregunta/" + idPregunta, { headers: header, withCredentials: true });
 
   }
 

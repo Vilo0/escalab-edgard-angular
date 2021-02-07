@@ -93,4 +93,15 @@ export class PreguntaService {
 
   }
 
+  public getPreguntasLeccion(idLeccion): Observable<any> {
+
+    let header = new HttpHeaders({
+      'Authorization': this.token,
+    });
+
+    return this.http
+      .get<any>(this.url +"/pregunta/leccion/" + idLeccion, { headers: header, withCredentials: true });
+
+  }
+
 }

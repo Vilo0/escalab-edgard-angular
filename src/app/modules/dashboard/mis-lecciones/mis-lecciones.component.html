@@ -1,3 +1,98 @@
-<p>
-  mis-lecciones works!
-</p>
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <app-sidebar></app-sidebar>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <app-header></app-header>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Lecciones</h1>
+                    <p class="mb-4">Administrar Lecciones.</p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header d-inline-block py-3">
+                        </div>
+                        <div class="card-body row">
+                            <div class="col-md-3">
+                                <div class="list-group">
+                                    <button *ngFor="let leccion of listaLecciones" type="button" class="list-group-item list-group-item-action" (click)="detalleLeccion(leccion)">
+                                        {{ leccion.nombre }}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <h3 class="text-left">Leccion: {{nombreLeccion}}</h3>
+                                <p class="text-justify">Descripción: {{descripcionLeccion}}</p>
+                                <a class="text-decoration-none" href="{{ urlLeccion }}" target="_blank">
+                                    <button class="btn btn-danger mr-2 d-block mb-3" [disabled]="idLeccion == ''">
+                                    Ver Documento
+                                </button>
+                                </a>
+                                <button class="btn btn-success mr-2" (click)="completarLeccion(idLeccion)" [disabled]="idLeccion == ''">Completar Leccion</button>
+                                <button class="btn btn-warning" (click)="noCompletarLeccion(idLeccion)" [disabled]="idLeccion == ''">No Completar Leccion</button>
+                                <button class="btn btn-primary mt-2 d-block" (click)="verPreguntas(idLeccion)" [disabled]="idLeccion == ''">Ver Preguntas</button>
+                                <button class="btn btn-primary mt-2 d-block" (click)="ocultar()" [disabled]="idLeccion == ''">Ocultar Preguntas</button>
+
+                                <div class="row">
+
+                                    <div *ngIf="mostrarPreguntas" class="col-md-8 mt-4">
+                                        <div *ngFor="let pregunta of preguntas" class="">
+                                            <h4 class="text">{{ pregunta.descripcion }}</h4>
+                                            <img src="{{ pregunta.imagen }}" alt="" class="img-fluid">
+                                            <button class="btn btn-primary mt-3" (click)="verRespuestas(pregunta._id)">Ver Respuestas</button>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="mostrarRespuestas" class="col-md-4 mt-4">
+                                        <div *ngFor="let respuesta of respuestas" class="">
+                                            <h4 class="text">{{ respuesta.descripcion }}</h4>
+                                            <img src="{{ respuesta.imagen }}" alt="" class="img-fluid">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <app-footer></app-footer>
