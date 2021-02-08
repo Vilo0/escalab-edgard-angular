@@ -23,12 +23,16 @@
                     <h1 class="h3 mb-2 text-gray-800">Cursos</h1>
                     <p class="mb-4">Administrar Cursos.</p>
 
+                    <h3>Usuario: {{ usuario.nombre }}</h3>
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header d-inline-block py-3">
-                            <button (click)="open(null, 'Agregar')" class="btn btn-success">
-                                <span class="mr-3">Agregar</span> <i class="fas fa-plus"></i>
+
+                            <button (click)="open(null, 'Agregar')" class="btn btn-info">
+                                <span class="mr-3">Administrar Cursos</span>
                             </button>
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -43,27 +47,18 @@
                                     </thead>
                                     <tbody *ngFor="let curso of listaCursos">
                                         <tr>
-                                            <td class="text-center p-1"><img src="{{curso.imagen}}" alt="" width="100"></td>
-                                            <td>{{curso.nombre_categoria}}</td>
-                                            <td>{{curso.nombre}}</td>
+                                            <td class="text-center p-1"><img src="{{curso.cursoId.imagen}}" alt="" width="100"></td>
+                                            <td>{{curso.cursoId.nombre_categoria}}</td>
+                                            <td>{{curso.cursoId.nombre}}</td>
                                             <td>
-                                                <button (click)="open(curso, 'Editar')" class="btn btn-sm btn-warning mr-3">
-                                                    <i class="fas fa-pencil-alt"></i>
+                                                <button (click)="activarCurso(curso.cursoId._id)" class="btn btn-sm btn-success mr-3" [disabled]="curso.disponible">
+                                                    Activar
                                                 </button>
 
-                                                <button (click)="open(curso, 'Eliminar')" class="btn btn-sm btn-danger mr-3">
-                                                    <i class="far fa-trash-alt"></i>
+                                                <button (click)="desactivarCurso(curso.cursoId._id)" class="btn btn-sm btn-danger mr-3" [disabled]="!curso.disponible">
+                                                    Desactivar
                                                 </button>
 
-                                                <div class="btn-group" role="group">
-                                                    <button id="btnGroupDrop1" type="button" class="btn btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-ellipsis-v"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                        <a class="dropdown-item" [routerLink]="['/leccion', curso._id]">Ver Lecciones</a>
-                                                        <a class="dropdown-item" (click)="openLeccion(curso._id, 'Agregar')">Agregar Lección</a>
-                                                    </div>
-                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>

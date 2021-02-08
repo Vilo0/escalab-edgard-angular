@@ -15,7 +15,7 @@ export class UsuarioService {
 
   private leccionesCompletadas:any = [];
 
-  private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvSWQiOiI2MDE1N2IyNmIwMGY2NjQwZGNlYmQxNDAiLCJyb2xlIjoiQURNSU5fUk9MRSIsImlhdCI6MTYxMjExNzUzOSwiZXhwIjoxNjEyNzIyMzM5fQ.JTfY-BzKlBHPzwP2dFBKwlMltcrLQJYEfki9hanxwdY';
+  private token = this.loginService.token;
 
   options = {
 
@@ -146,6 +146,54 @@ export class UsuarioService {
 
     return this.http
       .get<any>(this.url +"/usuario/" + idUsuario + "/leccion/" + idLeccion + '/incompleta', { headers: header, withCredentials: true },);
+
+  }
+
+
+  public activarCurso(usuarioId, cursoId): Observable<any> {
+
+    let header= new HttpHeaders({
+      'Authorization': this.token,
+    });
+
+    return this.http
+      .get<any>(this.url +"/usuario/" + usuarioId + '/curso/' + cursoId + '/activar', { headers: header, withCredentials: true },);
+
+  }
+
+
+  public desactivarCurso(usuarioId, cursoId): Observable<any> {
+
+    let header= new HttpHeaders({
+      'Authorization': this.token,
+    });
+
+    return this.http
+      .get<any>(this.url +"/usuario/" + usuarioId + '/curso/' + cursoId + '/desactivar', { headers: header, withCredentials: true },);
+
+  }
+
+
+  public agregarCurso(usuarioId, cursoId): Observable<any> {
+
+    let header= new HttpHeaders({
+      'Authorization': this.token,
+    });
+
+    return this.http
+      .get<any>(this.url +"/usuario/" + usuarioId + '/curso/' + cursoId + '/agregar', { headers: header, withCredentials: true },);
+
+  }
+
+
+  public borrarCurso(usuarioId, cursoId): Observable<any> {
+
+    let header= new HttpHeaders({
+      'Authorization': this.token,
+    });
+
+    return this.http
+      .get<any>(this.url +"/usuario/" + usuarioId + '/curso/' + cursoId + '/borrar', { headers: header, withCredentials: true },);
 
   }
 

@@ -4,6 +4,7 @@ import { LeccionService } from '../../../core/services/leccion.service';
 import { UsuarioService } from '../../../core/services/usuario.service';
 import { PreguntaService } from '../../../core/services/pregunta.service';
 import { RespuestaService } from '../../../core/services/respuesta.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-mis-lecciones',
@@ -37,6 +38,7 @@ export class MisLeccionesComponent implements OnInit {
     private usuarioService: UsuarioService,
     private preguntaService: PreguntaService,
     private respuestaService: RespuestaService,
+    private toastr: ToastrService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -48,6 +50,8 @@ export class MisLeccionesComponent implements OnInit {
       this.idCurso = params.get("cursoId");
 
       this.getLeccionesCurso(this.idCurso);
+
+      this.toastr.success('', 'Lecciones cargadas correctamente!');
 
     });
 
@@ -67,7 +71,15 @@ export class MisLeccionesComponent implements OnInit {
 
   }
 
-  detalleLeccion(leccion){
+  detalleLeccion(event, leccion){
+
+    // const hasClass = event.target.classList.contains('active');
+
+    // if(hasClass) {
+    //   event.target.classList.remove( "active" );
+    // } else {
+    //   event.target.classList.add( "active" );
+    // }
 
     console.log(leccion);
 
@@ -100,6 +112,8 @@ export class MisLeccionesComponent implements OnInit {
 
       console.log(this.resultado);
 
+      this.toastr.success('', 'Lección completa!');
+
     })
 
   }
@@ -113,6 +127,8 @@ export class MisLeccionesComponent implements OnInit {
       this.mostrarPreguntas = true;
 
       console.log(this.resultado);
+
+      this.toastr.warning('', 'Lección incompleta!');
 
     })
 

@@ -14,7 +14,7 @@ export class CursoService {
   // private host = 'https://node4g-test.herokuapp.com';
   private url = this.host+'/api/v1';
 
-  private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvSWQiOiI2MDE1N2IyNmIwMGY2NjQwZGNlYmQxNDAiLCJyb2xlIjoiQURNSU5fUk9MRSIsImlhdCI6MTYxMjExNzUzOSwiZXhwIjoxNjEyNzIyMzM5fQ.JTfY-BzKlBHPzwP2dFBKwlMltcrLQJYEfki9hanxwdY';
+  private token = this.loginService.token;
 
   options = {
 
@@ -100,6 +100,18 @@ export class CursoService {
     });
 
     return this.http.delete(this.url + "/curso/" + id, { headers: header, withCredentials: true });
+
+  }
+
+
+  public getCursosCategoria(idCategoria): Observable<any> {
+
+    let header= new HttpHeaders({
+      'Authorization': this.token,
+    });
+
+    return this.http
+      .get<any>(this.url +"/curso/categoria/" + idCategoria, { headers: header, withCredentials: true });
 
   }
 

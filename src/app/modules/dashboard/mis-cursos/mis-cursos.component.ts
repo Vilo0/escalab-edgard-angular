@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../../core/services/usuario.service';
+import { LoginService } from '../../../core/services/login.service';
 
 @Component({
   selector: 'app-mis-cursos',
@@ -9,12 +10,14 @@ import { UsuarioService } from '../../../core/services/usuario.service';
 })
 export class MisCursosComponent implements OnInit {
 
-  idUsuario:string = '601f1570ccb54906a47796d7';
+  idUsuario:string = '';
   misCursos:any = [];
 
-  constructor(private usuarioService: UsuarioService, private router: Router) { }
+  constructor(private usuarioService: UsuarioService, private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
+
+    this.idUsuario = this.loginService.token;
 
     this.getIdUsuario();
 
@@ -34,7 +37,7 @@ export class MisCursosComponent implements OnInit {
 
   irMisLecciones(curso){
 
-    this.usuarioService.guardarLecciones(curso.lecciones.items);
+    //this.usuarioService.guardarLecciones(curso.lecciones.items);
     
     this.router.navigateByUrl('/mis-lecciones/' + curso.cursoId._id);
 

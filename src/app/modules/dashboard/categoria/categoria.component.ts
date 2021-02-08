@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../../core/services/categoria.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAccionCategoriaComponent } from './modal-accion-categoria/modal-accion-categoria.component';
+import { ModalAccionCursoComponent } from '../curso/modal-accion-curso/modal-accion-curso.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-categoria',
@@ -16,11 +18,28 @@ export class CategoriaComponent implements OnInit {
 
   public listaCategorias:any = [];
 
-  constructor(private categoriaService: CategoriaService, private modalService: NgbModal) { }
+  constructor(private categoriaService: CategoriaService, private modalService: NgbModal, private toastr: ToastrService) { }
 
   open(categoria, accion) {
     const modalRef = this.modalService.open(ModalAccionCategoriaComponent);
     modalRef.componentInstance.categoria = categoria;
+    modalRef.componentInstance.accion = accion;
+
+    modalRef.result.then((data) => {
+      // on close
+      this.getCategorias();
+    }, (reason) => {
+      // on dismiss
+    });
+
+  }
+
+
+  openCurso(nombre_categoria, accion){
+
+    const modalRef = this.modalService.open(ModalAccionCursoComponent);
+    modalRef.componentInstance.curso = null;
+    modalRef.componentInstance.nombre_cat = nombre_categoria;
     modalRef.componentInstance.accion = accion;
 
     modalRef.result.then((data) => {
@@ -38,7 +57,21 @@ export class CategoriaComponent implements OnInit {
     this.categoriaService.getCategorias().subscribe( item => {
 
       this.listaCategorias = item.data;
-      console.log(item);
+
+      if(!item.result){
+        this.toastr.error('Hubo un error al Cargar la data', '');
+      }
+      
+      else{
+        if(this.listaCategorias.length > 0){
+          this.toastr.success('Categorías cargadas correctamente!', '');
+        }
+        else{
+          this.toastr.warning('No se encontraron categorías', '');
+        }
+      }
+
+      
 
     });
 

@@ -14,6 +14,7 @@ export class ModalAccionLeccionComponent implements OnInit {
 
   @Input() leccion;
   @Input() accion;
+  @Input() idCurso = '';
 
   message:string = '';
 
@@ -51,6 +52,10 @@ export class ModalAccionLeccionComponent implements OnInit {
       this.descripcion = this.leccion.descripcion;
       this.documento = this.leccion.documento;
       this.cursoId = this.leccion.cursoId;
+    }
+
+    if(this.idCurso != ''){
+      this.cursoId = this.idCurso;
     }
 
     this.leccionForm = this.cb.group({

@@ -9,11 +9,11 @@ import { LoginService } from './login.service';
 })
 export class PreguntaService {
 
-  private host = 'https://escalab-edgard-vilo.herokuapp.com';
+  private host = 'http://localhost:3000';
   // private host = 'https://node4g-test.herokuapp.com';
   private url = this.host+'/api/v1';
 
-  private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvSWQiOiI2MDE1N2IyNmIwMGY2NjQwZGNlYmQxNDAiLCJyb2xlIjoiQURNSU5fUk9MRSIsImlhdCI6MTYxMjExNzUzOSwiZXhwIjoxNjEyNzIyMzM5fQ.JTfY-BzKlBHPzwP2dFBKwlMltcrLQJYEfki9hanxwdY';
+  private token = this.loginService.token;
 
   options = {
 
@@ -31,8 +31,12 @@ export class PreguntaService {
 
   public getPreguntas(): Observable<any> {
 
+    let header= new HttpHeaders({
+      'Authorization': this.token,
+    });
+
     return this.http
-      .get<any>(this.url +"/pregunta/");
+      .get<any>(this.url +"/pregunta/", { headers: header, withCredentials: true });
 
   }
 

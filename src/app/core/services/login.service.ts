@@ -9,7 +9,7 @@ import { ModelUsuario } from '../models/usuario';
 })
 export class LoginService {
 
-  private host = 'https://escalab-edgard-vilo.herokuapp.com';
+  private host = 'http://localhost:3000';
   // private host = 'https://node4g-test.herokuapp.com';
   private url = this.host + '/api/v1';
   public usuario: ModelUsuario;
@@ -71,11 +71,18 @@ export class LoginService {
       email,
       password
     }
+
+    localStorage.setItem('prueba', 'test');
+
     return this.http.post<Transaccion>(`${this.url}/login`, data, 
     { withCredentials: true })
     .pipe(
       tap((resp: Transaccion )=> {
+        
         if (resp.result ){
+
+          console.log('entro al servicio de login: ', resp.data);
+
           this.guardarLocalStorage(resp.data['token']);
 
           this.usuario = new ModelUsuario(
@@ -83,6 +90,7 @@ export class LoginService {
             resp.data['nombre'],
             resp.data['role']
           );
+
           localStorage.setItem('usuario', JSON.stringify(this.usuario))
           
           

@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // para que funcione el httpclient
@@ -30,6 +29,17 @@ import { MiPerfilComponent } from './modules/dashboard/mi-perfil/mi-perfil.compo
 import { MisCursosComponent } from './modules/dashboard/mis-cursos/mis-cursos.component';
 import { MisLeccionesComponent } from './modules/dashboard/mis-lecciones/mis-lecciones.component';
 
+
+import { CommonModule } from '@angular/common';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+import { ModalAccionPreguntaComponent } from './modules/dashboard/pregunta/modal-accion-pregunta/modal-accion-pregunta.component';
+import { ModalAccionRespuestaComponent } from './modules/dashboard/respuesta/modal-accion-respuesta/modal-accion-respuesta.component';
+import { AdministrarCursoComponent } from './modules/dashboard/usuario/administrar-curso/administrar-curso.component';
+import { ModalAdministrarCursoComponent } from './modules/dashboard/usuario/modal-administrar-curso/modal-administrar-curso.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +60,11 @@ import { MisLeccionesComponent } from './modules/dashboard/mis-lecciones/mis-lec
     ModalAccionCategoriaComponent,
     ModalAccionCursoComponent,
     ModalAccionLeccionComponent,
-    ModalAccionUsuarioComponent
+    ModalAccionUsuarioComponent,
+    ModalAccionPreguntaComponent,
+    ModalAccionRespuestaComponent,
+    AdministrarCursoComponent,
+    ModalAdministrarCursoComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +72,9 @@ import { MisLeccionesComponent } from './modules/dashboard/mis-lecciones/mis-lec
     BrowserAnimationsModule,
     NgbModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule, // required animations module
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

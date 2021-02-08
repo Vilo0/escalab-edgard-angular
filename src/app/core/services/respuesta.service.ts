@@ -9,11 +9,11 @@ import { LoginService } from './login.service';
 })
 export class RespuestaService {
 
-  private host = 'https://escalab-edgard-vilo.herokuapp.com';
+  private host = 'http://localhost:3000';
   // private host = 'https://node4g-test.herokuapp.com';
   private url = this.host+'/api/v1';
 
-  private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvSWQiOiI2MDE1N2IyNmIwMGY2NjQwZGNlYmQxNDAiLCJyb2xlIjoiQURNSU5fUk9MRSIsImlhdCI6MTYxMjExNzUzOSwiZXhwIjoxNjEyNzIyMzM5fQ.JTfY-BzKlBHPzwP2dFBKwlMltcrLQJYEfki9hanxwdY';
+  private token = this.loginService.token;
 
   options = {
 
@@ -41,7 +41,7 @@ export class RespuestaService {
   }
 
 
-  public postRespuesta(respuesta): Observable<any> {
+  public postRespuesta(respuesta, idUsuario): Observable<any> {
 
     const formData: FormData = new FormData();
 
@@ -57,7 +57,7 @@ export class RespuestaService {
 
     return this.http
         .post<any>(
-          this.url + "/respuesta", 
+          this.url + "/respuesta/usuario/" + idUsuario, 
           formData, 
           { headers: header, withCredentials: true },
         );

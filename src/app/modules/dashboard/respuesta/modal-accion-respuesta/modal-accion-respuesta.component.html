@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ accion }} Leccion</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cerrar Modal')">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+
+    <form *ngIf="accion == 'Agregar'" autocomplete="off" [formGroup]="respuestaForm" (ngSubmit)="agregar()" novalidate>
+
+        <div class="form-group">
+            <label for="">Descripción</label>
+            <textarea class="form-control" rows="4" autocomplete="off" formControlName="descripcion"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="imagen">Imagen</label>
+            <input id="imagen" type="file" class="form-control" autocomplete="off" formControlName="imagen" (change)="onFileChanged($event)">
+        </div>
+
+        <button type="submit" class="btn btn-large btn-success" [disabled]="!respuestaForm.valid">Agregar</button>
+    </form>
+
+</div>
+<div class="modal-footer">
+    <!--<button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>-->
+</div>

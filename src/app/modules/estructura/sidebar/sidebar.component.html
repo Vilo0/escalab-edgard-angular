@@ -42,7 +42,7 @@
         </div>
     </li>-->
 
-    <li class="nav-item">
+    <li *ngIf="usuario.role == 'ADMIN_ROLE'" class="nav-item">
         <a class="nav-link" routerLink="/categoria" routerLinkActive="active">
             <i class="fas fa-fw fa-cog"></i>
             <span>Categoria</span></a>
@@ -78,13 +78,13 @@
             <span>Usuario</span></a>
     </li>
 
-    <li class="nav-item">
+    <li *ngIf="usuario.role == 'USER_ROLE'" class="nav-item">
         <a class="nav-link" routerLink="/mi-perfil" routerLinkActive="active">
             <i class="fas fa-fw fa-cog"></i>
             <span>Mi Perfil</span></a>
     </li>
 
-    <li class="nav-item">
+    <li *ngIf="usuario.role == 'ADMIN_ROLE'" class="nav-item">
         <a class="nav-link" routerLink="/mis-cursos" routerLinkActive="active">
             <i class="fas fa-fw fa-cog"></i>
             <span>Mi Cursos</span></a>

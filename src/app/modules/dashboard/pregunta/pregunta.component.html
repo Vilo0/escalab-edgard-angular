@@ -19,7 +19,70 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <h3>Panel de administrador Pregunta</h3>
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Preguntas</h1>
+                    <p class="mb-4">Administrar Preguntas.</p>
+
+                    <h3 *ngIf="miLeccion != null">Preguntas de la Lección: {{ miLeccion.nombre }}</h3>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header d-inline-block py-3">
+                            <button (click)="open(null, 'Agregar')" class="btn btn-success">
+                              <span class="mr-3">Agregar</span> <i class="fas fa-plus"></i>
+                          </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th *ngIf="miLeccion == null">Lección</th>
+                                            <th>Usuario</th>
+                                            <th>Descripcion</th>
+                                            <th>Imagen</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let pregunta of listaPreguntas">
+                                        <tr>
+                                            <td *ngIf="miLeccion == null">{{pregunta.leccionId.nombre}}</td>
+                                            <td>{{pregunta.usuario.nombre}} {{pregunta.usuario.apellido}}</td>
+                                            <td>{{pregunta.descripcion}}</td>
+                                            <td><img src="{{ pregunta.imagen }}" alt="" width="200"></td>
+                                            <td>
+                                                <button (click)="open(pregunta, 'Editar')" class="btn btn-sm btn-warning mr-3">
+                                                  <i class="fas fa-pencil-alt"></i>
+                                              </button>
+
+                                                <button (click)="open(pregunta, 'Eliminar')" class="btn btn-sm btn-danger mr-3">
+                                                  <i class="far fa-trash-alt"></i>
+                                              </button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop1" type="button" class="btn btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                      <i class="fas fa-ellipsis-v"></i>
+                                                  </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" (click)="openRespuesta(pregunta._id, 'Agregar')">Responder Pregunta</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th *ngIf="miLeccion == null">Lección</th>
+                                            <th>Usuario</th>
+                                            <th>Descripcion</th>
+                                            <th>Imagen</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
