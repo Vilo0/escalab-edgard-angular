@@ -1,27 +1,39 @@
-# AngularEscalabEdgard
+# Escalab Angular Edgard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
+Este proyecto se generó con [Angular CLI] (https://github.com/angular/angular-cli) versión 11.0.5.
 
-## Development server
+## Instalar paquetes
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Ejecute `npm install` para ejecutar los paquetes respectivos.
 
-## Code scaffolding
+## Ejecutar server en desarrollo
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4200/`. La aplicación se recargará automáticamente si cambia alguno de los archivos de origen.
+
+## Código
+
+Ejecute `ng generate component component-name` para generar un nuevo componente. También puede usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Ejecute `ng build` para construir el proyecto. Los artefactos de construcción se almacenarán en el directorio `dist/`. Usa la marca `--prod` para una construcción de producción.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Registro de usuario
 
-## Running end-to-end tests
+La url es `http://localhost:4200/registro` para agregar un usuario con rol user
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## Iniciar sesión
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+La url es `http://localhost:4200/login`
+
+Se pueden utilizar los siguientes usuario:
+
+User
+usuario: user@test.com
+contraseña: escalabNode
+
+Admin
+usuario: admin@test.com
+contraseña: escalabNode
