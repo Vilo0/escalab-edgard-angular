@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CursoService } from '../../../core/services/curso.service';
 import { ModalAccionCursoComponent } from './modal-accion-curso/modal-accion-curso.component';
 import { ModalAccionLeccionComponent } from '../leccion/modal-accion-leccion/modal-accion-leccion.component';
+import { LoginService } from '../../../core/services/login.service';
 
 @Component({
   selector: 'app-curso',
@@ -18,9 +19,11 @@ export class CursoComponent implements OnInit {
   public listaCursos:any = [];
 
   constructor(
-    private cursoService: CursoService, 
+    private cursoService: CursoService,
+    private loginService: LoginService, 
     private modalService: NgbModal,
     private route: ActivatedRoute,
+    private router: Router,
     private toastr: ToastrService) { }
 
   open(curso, accion) {
@@ -88,10 +91,10 @@ export class CursoComponent implements OnInit {
       console.log(item);
 
       if(this.listaCursos.length > 0){
-        this.toastr.success('', 'Cursos cargados correctamente!');
+        this.toastr.success('Cursos cargados correctamente!', '');
       }
       else{
-        this.toastr.warning('', 'No se encontraron cursos');
+        this.toastr.warning('No se encontraron cursos', '');
       }
 
     });
@@ -100,21 +103,28 @@ export class CursoComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.paramMap.subscribe(params => {
 
-      const categoriaId = params.get("categoriaId");
+    if(this.loginService.estaAutenticado()){
 
-      console.log('categoriId es:', categoriaId);
+      this.route.paramMap.subscribe(params => {
 
-      if(categoriaId == null){
-        this.getCursos();
-      }
-      else{
-        this.getCursosCategoria(categoriaId);
-      }
+        const categoriaId = params.get("categoriaId");
+  
+        console.log('categoriId es:', categoriaId);
+  
+        if(categoriaId == null){
+          this.getCursos();
+        }
+        else{
+          this.getCursosCategoria(categoriaId);
+        }
+  
+      });
 
-    });
-
+    }
+    else{
+      this.router.navigateByUrl('/login');
+    }
     
 
   }

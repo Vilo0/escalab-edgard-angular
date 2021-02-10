@@ -39,10 +39,12 @@ import { ModalAccionPreguntaComponent } from './modules/dashboard/pregunta/modal
 import { ModalAccionRespuestaComponent } from './modules/dashboard/respuesta/modal-accion-respuesta/modal-accion-respuesta.component';
 import { AdministrarCursoComponent } from './modules/dashboard/usuario/administrar-curso/administrar-curso.component';
 import { ModalAdministrarCursoComponent } from './modules/dashboard/usuario/modal-administrar-curso/modal-administrar-curso.component';
+import { RegisterComponent } from './modules/login/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    RegisterComponent,
     LoginComponent,
     HomeComponent,
     CategoriaComponent,

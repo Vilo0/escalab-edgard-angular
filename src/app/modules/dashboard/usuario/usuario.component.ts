@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginService } from 'src/app/core/services/login.service';
 import { UsuarioService } from '../../../core/services/usuario.service';
 import { ModalAccionUsuarioComponent } from './modal-accion-usuario/modal-accion-usuario.component';
 
@@ -14,7 +16,11 @@ export class UsuarioComponent implements OnInit {
 
   public listaUsuarios:any = [];
 
-  constructor(private usuarioService: UsuarioService, private modalService: NgbModal) { }
+  constructor(
+    private usuarioService: UsuarioService, 
+    private modalService: NgbModal,
+    private loginService: LoginService, 
+    private router: Router) { }
 
   open(usuario, accion) {
 
@@ -45,7 +51,12 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getUsuarios();
+    if(this.loginService.estaAutenticado()){
+      this.getUsuarios();
+    }
+    else{
+      this.router.navigateByUrl('/login');
+    } 
 
   }
 

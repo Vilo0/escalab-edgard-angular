@@ -65,8 +65,6 @@ export class ModalAccionCursoComponent implements OnInit {
       nombre_categoria: this.nombre_categoria,
     });
 
-    console.log(this.cursoForm);
-
   }
 
   private getCategorias(){

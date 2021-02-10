@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { CategoriaService } from '../../../../core/services/categoria.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class ModalAccionCategoriaComponent implements OnInit {
     public activeModal: NgbActiveModal, 
     private cb: FormBuilder,
     private categoriaService: CategoriaService,
-    private router: Router
+    private toastr: ToastrService
     ) { }
 
   ngOnInit() {
@@ -45,13 +46,20 @@ export class ModalAccionCategoriaComponent implements OnInit {
     this.categoriaService.postCategoria(this.categoriaForm.value.nombre)
       .subscribe(item =>{
 
-        console.log(item);
-        this.activeModal.close();      
+        this.activeModal.close();  
+        
+        if(item.result){
+          this.toastr.success('Categoría ingresada correctamente', '');
+        }
+        else{
+          this.toastr.warning('' + item.data, '');
+        }
         //this.router.navigateByUrl('/categoria');
 
     }, (err) => {
 
         console.log(err);
+        this.toastr.error(err.error.message, '');
         this.message = err.error.message;
       
     });
@@ -67,13 +75,19 @@ export class ModalAccionCategoriaComponent implements OnInit {
     this.categoriaService.putCategoria(this.categoria)
       .subscribe(item =>{
 
-        console.log(item);
+        if(item.result){
+          this.toastr.success('Categoría actualizada correctamente', '');
+        }
+        else{
+          this.toastr.warning('' + item.data, '');
+        }
+
         this.activeModal.close();      
         //this.router.navigateByUrl('/categoria');
 
     }, (err) => {
 
-        console.log(err);
+        this.toastr.error(err.error.message, '');
         this.message = err.error.message;
       
     });
@@ -87,12 +101,19 @@ export class ModalAccionCategoriaComponent implements OnInit {
       .subscribe(item =>{
 
         console.log(item);
-        this.categoriaService.getCategorias();
+        
+        if(item.result){
+          this.toastr.success('Categoría eliminada correctamente', '');
+        }
+        else{
+          this.toastr.warning('' + item.data, '');
+        }
+
         this.activeModal.close();      
 
     }, (err) => {
 
-        console.log(err);
+        this.toastr.error(err.error.message, '');
         this.message = err.error.message;
       
     });

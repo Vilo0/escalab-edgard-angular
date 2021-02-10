@@ -13,13 +13,24 @@ export class MisCursosComponent implements OnInit {
   idUsuario:string = '';
   misCursos:any = [];
 
-  constructor(private usuarioService: UsuarioService, private loginService: LoginService, private router: Router) { }
+  constructor(
+    private usuarioService: UsuarioService, 
+    private loginService: LoginService, 
+    private router: Router
+  ) { }
 
   ngOnInit() {
 
-    this.idUsuario = this.loginService.token;
+    if(this.loginService.estaAutenticado()){
 
-    this.getIdUsuario();
+      this.idUsuario = this.loginService.token;
+
+      this.getIdUsuario();
+
+    }
+    else{
+      this.router.navigateByUrl('/login');
+    } 
 
   }
 
@@ -27,7 +38,11 @@ export class MisCursosComponent implements OnInit {
 
     this.usuarioService.getUsuarioId(this.idUsuario).subscribe( item => {
 
-      this.misCursos = item.data.cursos.items;
+      if(item.data.cursos){
+        this.misCursos = item.data.cursos.items;
+      }
+
+      this.misCursos = [];
 
       console.log(this.misCursos);
 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { LoginService } from 'src/app/core/services/login.service';
 import { LeccionService } from '../../../core/services/leccion.service';
 import { ModalAccionLeccionComponent } from './modal-accion-leccion/modal-accion-leccion.component';
 
@@ -21,7 +22,9 @@ export class LeccionComponent implements OnInit {
     private leccionService: LeccionService, 
     private modalService: NgbModal,
     private route: ActivatedRoute,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private loginService: LoginService,
+    private router: Router) { }
 
   open(leccion, accion) {
 
@@ -82,18 +85,25 @@ export class LeccionComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.paramMap.subscribe(params => {
+    if(this.loginService.estaAutenticado()){
 
-      const cursoId = params.get("cursoId");
+      this.route.paramMap.subscribe(params => {
 
-      if(cursoId == null){
-        this.getLecciones();
-      }
-      else{
-        this.getLeccionesCurso(cursoId);
-      }
+        const cursoId = params.get("cursoId");
 
-    });
+        if(cursoId == null){
+          this.getLecciones();
+        }
+        else{
+          this.getLeccionesCurso(cursoId);
+        }
+
+      });
+
+    }
+    else{
+      this.router.navigateByUrl('/login');
+    } 
 
   }
 

@@ -9,8 +9,8 @@ import { ModelUsuario } from '../models/usuario';
 })
 export class LoginService {
 
-  private host = 'http://localhost:3000';
-  // private host = 'https://node4g-test.herokuapp.com';
+  // private host = 'http://localhost:3000';
+  private host = 'https://escalab-edgard-vilo.herokuapp.com';
   private url = this.host + '/api/v1';
   public usuario: ModelUsuario;
 
@@ -31,7 +31,7 @@ export class LoginService {
     localStorage.setItem('token', token);
 
     let hoy = new Date();
-    hoy.setSeconds(1800);
+    hoy.setSeconds(604800);
     localStorage.setItem('expira', hoy.getTime().toString());
 
   }
@@ -72,8 +72,6 @@ export class LoginService {
       password
     }
 
-    localStorage.setItem('prueba', 'test');
-
     return this.http.post<Transaccion>(`${this.url}/login`, data, 
     { withCredentials: true })
     .pipe(
@@ -102,24 +100,30 @@ export class LoginService {
   }
 
 
-  signin(formValue:any) {
+  signin(usuario:any) {
 
-    console.log('formValue:', formValue);
+    const formData: FormData = new FormData();
+
+    formData.append("nombre", usuario.nombre);
+    formData.append("apellido", usuario.apellido);
+    formData.append("email", usuario.email);
+    formData.append("telefono", usuario.telefono);
+    formData.append("password", usuario.password);
+
     
-    return this.http.post<Transaccion>(`${this.url}/signin`, formValue,
+    return this.http.post<Transaccion>(`${this.url}/registro`, formData,
       { withCredentials: true })
       .pipe(
         tap((resp: Transaccion) => {
           if (resp.result) {
-            this.guardarLocalStorage(resp.data['token']);
+            // this.guardarLocalStorage(resp.data['token']);
 
-            this.usuario = new ModelUsuario(
-              resp.data['usuarioId'],
-              resp.data['nombre'],
-              resp.data['role']
-            );
-            localStorage.setItem('usuario', JSON.stringify(this.usuario))
-
+            // this.usuario = new ModelUsuario(
+            //   resp.data['usuarioId'],
+            //   resp.data['nombre'],
+            //   resp.data['role']
+            // );
+            // localStorage.setItem('usuario', JSON.stringify(this.usuario))
 
           }
 
@@ -132,22 +136,11 @@ export class LoginService {
 
   logout(){
 
-    return this.http.get<Transaccion>(`${this.url}/logout`, { withCredentials: true })
-    .pipe(
-      tap((resp: Transaccion) => {
-        console.log('logout=>', resp.result);
-        
-        if(resp.result){
-          localStorage.removeItem('token');
-          localStorage.removeItem('expira');
-          localStorage.removeItem('usuario');
-        }
-      }
-      )
-    )
-
+      localStorage.removeItem('token');
+      localStorage.removeItem('expira');
+      localStorage.removeItem('usuario');
     
-
+      return true;
 
     
   }

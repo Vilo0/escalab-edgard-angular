@@ -10,8 +10,8 @@ import { LoginService } from './login.service';
 })
 export class CategoriaService {
 
-  private host = 'http://localhost:3000';
-  // private host = 'https://node4g-test.herokuapp.com';
+  // private host = 'http://localhost:3000';
+  private host = 'https://escalab-edgard-vilo.herokuapp.com';
   private url = this.host+'/api/v1';
 
   private token = this.loginService.token;
@@ -34,8 +34,12 @@ export class CategoriaService {
 
   public getCategorias(): Observable<any> {
 
+    let header= new HttpHeaders({
+      'Authorization': this.token,
+    });
+
     return this.http
-      .get<any>(this.url +"/categoria/");
+      .get<any>(this.url +"/categoria/", { headers: header, withCredentials: true });
 
   }
 

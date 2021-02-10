@@ -4,6 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAccionCategoriaComponent } from './modal-accion-categoria/modal-accion-categoria.component';
 import { ModalAccionCursoComponent } from '../curso/modal-accion-curso/modal-accion-curso.component';
 import { ToastrService } from 'ngx-toastr';
+import { LoginService } from '../../../core/services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categoria',
@@ -18,7 +20,12 @@ export class CategoriaComponent implements OnInit {
 
   public listaCategorias:any = [];
 
-  constructor(private categoriaService: CategoriaService, private modalService: NgbModal, private toastr: ToastrService) { }
+  constructor(
+    private categoriaService: CategoriaService, 
+    private modalService: NgbModal, 
+    private loginService: LoginService,
+    private router: Router,
+    private toastr: ToastrService) { }
 
   open(categoria, accion) {
     const modalRef = this.modalService.open(ModalAccionCategoriaComponent);
@@ -79,7 +86,12 @@ export class CategoriaComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getCategorias();
+    if(this.loginService.estaAutenticado()){
+      this.getCategorias();
+    }
+    else{
+      this.router.navigateByUrl('/login');
+    }   
 
   }
 

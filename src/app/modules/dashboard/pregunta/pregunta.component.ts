@@ -80,22 +80,29 @@ export class PreguntaComponent implements OnInit {
 
   ngOnInit() {
 
-    if(!this.loginService.estaAutenticado()){
-      this.router.navigateByUrl('/login');
+    if(this.loginService.estaAutenticado()){
+
+      if(!this.loginService.estaAutenticado()){
+        this.router.navigateByUrl('/login');
+      }
+
+      this.route.paramMap.subscribe(params => {
+
+        const leccionId = params.get("leccionId");
+
+        if(leccionId == null){
+          this.getPreguntas();
+        }
+        else{
+          this.getPreguntasLeccion(leccionId);
+        }
+
+      });
+    
     }
-
-    this.route.paramMap.subscribe(params => {
-
-      const leccionId = params.get("leccionId");
-
-      if(leccionId == null){
-        this.getPreguntas();
-      }
-      else{
-        this.getPreguntasLeccion(leccionId);
-      }
-
-    });
+    else{
+      this.router.navigateByUrl('/login');
+    } 
 
   }
 

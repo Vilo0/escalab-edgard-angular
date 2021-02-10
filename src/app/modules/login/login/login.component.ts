@@ -28,12 +28,14 @@ export class LoginComponent implements OnInit {
   login(){
     this.loginservice.login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(item =>{
-        console.log(item);
-        this.router.navigateByUrl('/dashboard');
-    }, (err) => {
-          console.log(err);
-      this.message = err.error.message;
+
+        if(item){
+          this.router.navigateByUrl('/dashboard');
+        }
       
+    }, (err) => {
+      console.log(err);
+      this.message = err.error.message;
     });
   }
 

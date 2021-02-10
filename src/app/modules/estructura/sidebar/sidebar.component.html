@@ -14,7 +14,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -48,31 +48,25 @@
             <span>Categoria</span></a>
     </li>
 
-    <li class="nav-item">
+    <li *ngIf="usuario.role == 'ADMIN_ROLE'" class="nav-item">
         <a class="nav-link" routerLink="/curso" routerLinkActive="active">
             <i class="fas fa-fw fa-cog"></i>
             <span>Curso</span></a>
     </li>
 
-    <li class="nav-item">
+    <li *ngIf="usuario.role == 'ADMIN_ROLE'" class="nav-item">
         <a class="nav-link" routerLink="/leccion" routerLinkActive="active">
             <i class="fas fa-fw fa-cog"></i>
             <span>Leccion</span></a>
     </li>
 
-    <li class="nav-item">
+    <li *ngIf="usuario.role == 'ADMIN_ROLE'" class="nav-item">
         <a class="nav-link" routerLink="/pregunta" routerLinkActive="active">
             <i class="fas fa-fw fa-cog"></i>
             <span>Pregunta</span></a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" routerLink="/respuesta" routerLinkActive="active">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Respuesta</span></a>
-    </li>
-
-    <li class="nav-item">
+    <li *ngIf="usuario.role == 'ADMIN_ROLE'" class="nav-item">
         <a class="nav-link" routerLink="/usuario" routerLinkActive="active">
             <i class="fas fa-fw fa-cog"></i>
             <span>Usuario</span></a>
@@ -84,7 +78,7 @@
             <span>Mi Perfil</span></a>
     </li>
 
-    <li *ngIf="usuario.role == 'ADMIN_ROLE'" class="nav-item">
+    <li *ngIf="usuario.role == 'USER_ROLE'" class="nav-item">
         <a class="nav-link" routerLink="/mis-cursos" routerLinkActive="active">
             <i class="fas fa-fw fa-cog"></i>
             <span>Mi Cursos</span></a>

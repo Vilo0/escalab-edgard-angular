@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { LeccionService } from '../../../core/services/leccion.service';
 import { UsuarioService } from '../../../core/services/usuario.service';
 import { PreguntaService } from '../../../core/services/pregunta.service';
 import { RespuestaService } from '../../../core/services/respuesta.service';
 import { ToastrService } from 'ngx-toastr';
+import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-mis-lecciones',
@@ -39,23 +40,30 @@ export class MisLeccionesComponent implements OnInit {
     private preguntaService: PreguntaService,
     private respuestaService: RespuestaService,
     private toastr: ToastrService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private loginService: LoginService, 
+    private router: Router) { }
 
   ngOnInit() {
 
-    this.misLeccionesCompletadas = this.usuarioService.obtenerLecciones();
+    if(this.loginService.estaAutenticado){
 
-    this.route.paramMap.subscribe(params => {
+      this.misLeccionesCompletadas = this.usuarioService.obtenerLecciones();
 
-      this.idCurso = params.get("cursoId");
+      this.route.paramMap.subscribe(params => {
 
-      this.getLeccionesCurso(this.idCurso);
+        this.idCurso = params.get("cursoId");
 
-      this.toastr.success('', 'Lecciones cargadas correctamente!');
+        this.getLeccionesCurso(this.idCurso);
 
-    });
+        this.toastr.success('', 'Lecciones cargadas correctamente!');
 
-    console.log(this.misLeccionesCompletadas);
+      });
+
+    }
+    else{
+      this.router.navigateByUrl('/login');
+    } 
 
   }
 

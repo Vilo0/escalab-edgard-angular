@@ -12,10 +12,12 @@ import { MiPerfilComponent } from './modules/dashboard/mi-perfil/mi-perfil.compo
 import { MisCursosComponent } from './modules/dashboard/mis-cursos/mis-cursos.component';
 import { MisLeccionesComponent } from './modules/dashboard/mis-lecciones/mis-lecciones.component';
 import { AdministrarCursoComponent } from './modules/dashboard/usuario/administrar-curso/administrar-curso.component';
+import { RegisterComponent } from './modules/login/register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full', },
   { path: 'login', component: LoginComponent },
+  { path: 'registro', component: RegisterComponent },
   { path: 'dashboard', component: HomeComponent },
   { path: 'categoria', component: CategoriaComponent },
   { path: 'curso', component: CursoComponent },

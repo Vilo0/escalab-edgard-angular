@@ -9,9 +9,8 @@ import { LoginService } from './login.service';
 })
 export class CursoService {
 
-  //private host = 'https://escalab-edgard-vilo.herokuapp.com';
-  private host = 'http://localhost:3000';
-  // private host = 'https://node4g-test.herokuapp.com';
+  // private host = 'http://localhost:3000';
+  private host = 'https://escalab-edgard-vilo.herokuapp.com';
   private url = this.host+'/api/v1';
 
   private token = this.loginService.token;

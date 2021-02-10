@@ -9,8 +9,8 @@ import { LoginService } from './login.service';
 })
 export class UsuarioService {
 
-  private host = 'http://localhost:3000';
-  // private host = 'https://node4g-test.herokuapp.com';
+  // private host = 'http://localhost:3000';
+  private host = 'https://escalab-edgard-vilo.herokuapp.com';
   private url = this.host+'/api/v1';
 
   private leccionesCompletadas:any = [];
@@ -64,8 +64,6 @@ export class UsuarioService {
     formData.append("email", usuario.email);
     formData.append("telefono", usuario.telefono);
     formData.append("password", usuario.password);
-
-    let token = this.loginService.token;
 
     let header= new HttpHeaders({
       'Authorization': this.token,
